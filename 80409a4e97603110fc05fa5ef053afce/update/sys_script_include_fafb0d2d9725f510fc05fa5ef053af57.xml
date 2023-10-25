@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_1105186_anchore.AnchoreImageProcessor</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>AnchoreImageProcessor</name>
+        <script><![CDATA[var AnchoreImageProcessor = Class.create();
+AnchoreImageProcessor.prototype = {
+    initialize: function(integrationGr, integrationProcessGr, importQueueEntryGr) {
+        if (integrationProcessGr) {
+            var process = new GlideRecord("sn_vul_integration_process");
+            process.get(integrationProcessGr);
+    
+            this.process = process.getValue("sys_id");
+            this.integrationProcessGr = integrationProcessGr;
+            this.integrationRun = integrationProcessGr.integration_run + '';
+            this.sourceInstance = integrationProcessGr.integration_run.implementation + ''; 
+            this.integration    = integrationProcessGr.integration_run.implementation.integration + '';
+        }
+        
+        this.import_counts = {
+            inserted: 0,
+            updated: 0,
+            unchanged: 0,
+            ignored: 0
+        };
+	},
+    completeProcess: function() {
+		try {        
+            var process = new GlideRecord("sn_vul_integration_process");            
+            if (this.integrationProcessGr != null && process.get(this.integrationProcessGr)) {
+                process.setValue("vi_created", this.import_counts.inserted);
+                process.setValue("vi_updated", this.import_counts.updated);
+                process.setValue("vi_unchanged", this.import_counts.unchanged);
+                process.setValue("vi_ignored", this.import_counts.ignored);
+                process.setValue("import_vi", this.import_counts.inserted + this.import_counts.updated + this.import_counts.unchanged);
+                process.update();
+                log.warn('AnchoreImageProcessor - completeProcess - Updated Counts: ' + JSON.stringify(this.import_counts));
+            }
+        } catch (ex) {
+            log.error("completeProcess - Exception: " + ex.message);
+            return;          
+        }
+	
+	},
+    processRecord: function(sourceGr) {
+        var image_content;
+        try
+        {
+            image_content = sourceGr.getValue("u_image_content");
+            image_content = JSON.parse(image_content);
+        } catch (ex) {
+            log.error("AnchoreImageProcessor - processRecord - Exception Loading Image Content: " + ex.message + " - " + image_content);   
+            return;
+        }
+
+        var image;
+        try
+        {
+            image = {
+                image_content: image_content,
+                analyzed_at: sourceGr.getValue("u_analyzed_at"),
+                image_digest: sourceGr.getValue("u_image_digest"),
+                parent_digest: sourceGr.getValue("u_parent_digest"),
+                image_id: sourceGr.getValue("u_image_id"),
+                repo: sourceGr.getValue("u_repo"),
+                full_tag: sourceGr.getValue("u_full_tag"),
+                tag: sourceGr.getValue("u_tag"),
+                created_at: sourceGr.getValue("u_created_at"),
+                registry: sourceGr.getValue("u_registry")
+            };
+        } catch (ex) {
+            log.error("AnchoreImageProcessor - processRecord - Exception Populating Image Object: " + ex.message);
+            return;
+        }
+
+        var host;
+        try
+        {
+            host = { 
+                "image_id": image.image_id, // Image ID of the Docker Image  
+                "id": image.image_id, // ID used for lookup in "Discovered Container Images"
+                "image_digest": image.image_digest.replace('sha256:', ''), // Image Digest
+                "name": image.registry + "/" + image.repo, // Name of the Docker Image 
+                "version": image.tag, // Image Repository version  
+                "image_creation_date": image.created_at, // Docker image creation date 
+                "last_scan_date": image.created_at, // Docker image last scan date 
+                "first_scan_date": image.created_at, // Docker image first scan date 
+                "image_namespace": image.registry, // Namespace of the Docker Image 
+                "image_cluster": "cloud-eks", // Cluster of the Docker Image 
+                "host_list": {"ip-172-10-0-91.us-east-2.compute.internal" : {"modified" : "2022-01-17T02:26:47.455Z"}}, // List of hosts 
+                "repo_value": image.registry + "/" + image.repo, // Image Repository name 
+                "os": image.image_content.metadata.distro + " " + image.image_content.metadata.distro_version, // Operating system + version 
+                "is_base_image": image.parent_digest == image.image_digest // Is the Docker Image a base image (true/false) 
+            };
+        } catch (ex) {
+            log.error("AnchoreImageProcessor - processRecord - Exception Populating Image Details: " + ex.message);
+            return;
+        }
+
+        try
+        {
+            if (this.sourceInstance && this.integrationRun) {
+                var sn_import = new sn_vul_container.ImportImage();
+                var res = sn_import.imageImport(this.sourceInstance, host, "id", this.integrationRun); 
+                if (res.ciAction == "INSERT") {
+                    this.import_counts.inserted++;
+                } else if (res.ciAction == "UPDATE") {
+                    this.import_counts.updated++;
+                } else {
+                    this.import_counts.ignored++;
+                }
+            }
+        } catch (ex) {
+            log.error("AnchoreImageProcessor - processRecord - Exception Importing Image: " + ex.message);   
+        }
+    },
+    type: 'AnchoreImageProcessor'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-09-27 19:30:35</sys_created_on>
+        <sys_id>fafb0d2d9725f510fc05fa5ef053af57</sys_id>
+        <sys_mod_count>28</sys_mod_count>
+        <sys_name>AnchoreImageProcessor</sys_name>
+        <sys_package display_value="Vulnerability Response Integration with Anchore " source="x_1105186_anchore">80409a4e97603110fc05fa5ef053afce</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</sys_scope>
+        <sys_update_name>sys_script_include_fafb0d2d9725f510fc05fa5ef053af57</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-09-28 08:36:14</sys_updated_on>
+    </sys_script_include>
+</record_update>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_transform_script">
+    <sys_transform_script action="DELETE">
+        <active>true</active>
+        <map display_value="Anchore Vulnerability Transform Map">2a287b6d97613910fc05fa5ef053afc2</map>
+        <order>100</order>
+        <script><![CDATA[(function runTransformScript(source, map, log, target) {
+	ignore=true;
+	x_1105186_anchore.processor.processRecord(source);
+})(source, map, log, target);]]></script>
+        <sys_class_name>sys_transform_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-09-28 07:51:57</sys_created_on>
+        <sys_id>508977ed97613910fc05fa5ef053af67</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>onBefore</sys_name>
+        <sys_package display_value="Vulnerability Response Integration with Anchore " source="x_1105186_anchore">80409a4e97603110fc05fa5ef053afce</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</sys_scope>
+        <sys_update_name>sys_transform_script_508977ed97613910fc05fa5ef053af67</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-09-28 07:51:57</sys_updated_on>
+        <when>onBefore</when>
+    </sys_transform_script>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</application>
+        <file_path/>
+        <instance_id>8f65e42a1b6f6d5852a243f4bd4bcbe9</instance_id>
+        <instance_name>dev177796</instance_name>
+        <name>sys_transform_script_508977ed97613910fc05fa5ef053af67</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_transform_script"&gt;&lt;sys_transform_script action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;map display_value="Anchore Vulnerability Transform Map"&gt;2a287b6d97613910fc05fa5ef053afc2&lt;/map&gt;&lt;order&gt;100&lt;/order&gt;&lt;script&gt;&lt;![CDATA[(function runTransformScript(source, map, log, target) {
+	ignore=true;
+	x_1105186_anchore.processor.processRecord(source);
+})(source, map, log, target);]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_transform_script&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2023-09-28 07:51:57&lt;/sys_created_on&gt;&lt;sys_id&gt;508977ed97613910fc05fa5ef053af67&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_name&gt;onBefore&lt;/sys_name&gt;&lt;sys_package display_value="Vulnerability Response Integration with Anchore " source="x_1105186_anchore"&gt;80409a4e97603110fc05fa5ef053afce&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Vulnerability Response Integration with Anchore "&gt;80409a4e97603110fc05fa5ef053afce&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_transform_script_508977ed97613910fc05fa5ef053af67&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2023-09-28 07:51:57&lt;/sys_updated_on&gt;&lt;when&gt;onBefore&lt;/when&gt;&lt;/sys_transform_script&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-839653499</payload_hash>
+        <record_name>onBefore</record_name>
+        <reverted_from/>
+        <source>8840da8e97603110fc05fa5ef053afdd</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-09-28 07:51:57</sys_created_on>
+        <sys_id>c099bfad97613910fc05fa5ef053aff6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18adac5e89c0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-09-28 07:51:57</sys_updated_on>
+        <type>Transform Script</type>
+        <update_guid>0c99bfaddf61391069313b3d2a5284f5</update_guid>
+        <update_guid_history>0c99bfaddf61391069313b3d2a5284f5:-839653499</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-10-11 20:21:01</sys_created_on>
+        <sys_db_object display_value="" name="sys_transform_script">sys_transform_script</sys_db_object>
+        <sys_id>00e1764fe3ea4bb8807b02fc2e1445a4</sys_id>
+        <sys_metadata>508977ed97613910fc05fa5ef053af67</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>onBefore</sys_name>
+        <sys_package display_value="Vulnerability Response Integration with Anchore " source="x_1105186_anchore">80409a4e97603110fc05fa5ef053afce</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</sys_scope>
+        <sys_scope_delete display_value="">8d9cf9fb7dbc48b4866a314522674ee4</sys_scope_delete>
+        <sys_update_name>sys_transform_script_508977ed97613910fc05fa5ef053af67</sys_update_name>
+        <sys_update_version display_value="sys_transform_script_508977ed97613910fc05fa5ef053af67">c099bfad97613910fc05fa5ef053aff6</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-10-11 20:21:01</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

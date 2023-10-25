@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="" section_id="765ad0c497703110fc05fa5ef053af70" sys_domain="global" table="x_1105186_anchore_vulnerability_response_integration" version="3" view="">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>name</element>
+            <position>0</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 16:58:46</sys_created_on>
+            <sys_id>365ad0c497703110fc05fa5ef053af71</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_vulnerability_response_integration" sys_domain="global" view="Default view">765ad0c497703110fc05fa5ef053af70</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 16:58:46</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.begin_split</element>
+            <position>1</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 16:58:46</sys_created_on>
+            <sys_id>ba5ad0c497703110fc05fa5ef053af71</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_vulnerability_response_integration" sys_domain="global" view="Default view">765ad0c497703110fc05fa5ef053af70</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 16:58:46</sys_updated_on>
+            <sys_user/>
+            <type>.begin_split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>active</element>
+            <position>2</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 16:58:46</sys_created_on>
+            <sys_id>3e5ad0c497703110fc05fa5ef053af71</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_vulnerability_response_integration" sys_domain="global" view="Default view">765ad0c497703110fc05fa5ef053af70</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 16:58:46</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>run_type</element>
+            <position>3</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 16:58:46</sys_created_on>
+            <sys_id>be5ad0c497703110fc05fa5ef053af71</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_vulnerability_response_integration" sys_domain="global" view="Default view">765ad0c497703110fc05fa5ef053af70</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 16:58:46</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>run_dayofmonth</element>
+            <position>4</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 16:58:46</sys_created_on>
+            <sys_id>325ad0c497703110fc05fa5ef053af72</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_vulnerability_response_integration" sys_domain="global" view="Default view">765ad0c497703110fc05fa5ef053af70</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 16:58:46</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>run_dayofweek</element>
+            <position>5</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 16:58:46</sys_created_on>
+            <sys_id>b25ad0c497703110fc05fa5ef053af72</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_vulnerability_response_integration" sys_domain="global" view="Default view">765ad0c497703110fc05fa5ef053af70</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 16:58:46</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>run_time</element>
+            <position>6</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 16:58:46</sys_created_on>
+            <sys_id>365ad0c497703110fc05fa5ef053af72</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_vulnerability_response_integration" sys_domain="global" view="Default view">765ad0c497703110fc05fa5ef053af70</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 16:58:46</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>run_period</element>
+            <position>7</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 16:58:46</sys_created_on>
+            <sys_id>b65ad0c497703110fc05fa5ef053af72</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_vulnerability_response_integration" sys_domain="global" view="Default view">765ad0c497703110fc05fa5ef053af70</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 16:58:46</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>run_start</element>
+            <position>8</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 16:58:46</sys_created_on>
+            <sys_id>3a5ad0c497703110fc05fa5ef053af72</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_vulnerability_response_integration" sys_domain="global" view="Default view">765ad0c497703110fc05fa5ef053af70</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 16:58:46</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.split</element>
+            <position>9</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 16:58:46</sys_created_on>
+            <sys_id>ba5ad0c497703110fc05fa5ef053af72</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_vulnerability_response_integration" sys_domain="global" view="Default view">765ad0c497703110fc05fa5ef053af70</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 16:58:46</sys_updated_on>
+            <sys_user/>
+            <type>.split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>integration</element>
+            <position>10</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 16:58:46</sys_created_on>
+            <sys_id>3e5ad0c497703110fc05fa5ef053af72</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_vulnerability_response_integration" sys_domain="global" view="Default view">765ad0c497703110fc05fa5ef053af70</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 16:58:46</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>instance</element>
+            <position>11</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 16:58:46</sys_created_on>
+            <sys_id>be5ad0c497703110fc05fa5ef053af72</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_vulnerability_response_integration" sys_domain="global" view="Default view">765ad0c497703110fc05fa5ef053af70</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 16:58:46</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>sys_scope</element>
+            <position>12</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 16:58:46</sys_created_on>
+            <sys_id>325ad0c497703110fc05fa5ef053af73</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_vulnerability_response_integration" sys_domain="global" view="Default view">765ad0c497703110fc05fa5ef053af70</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 16:58:46</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>conditional</element>
+            <position>13</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 16:58:46</sys_created_on>
+            <sys_id>b25ad0c497703110fc05fa5ef053af73</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_vulnerability_response_integration" sys_domain="global" view="Default view">765ad0c497703110fc05fa5ef053af70</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 16:58:46</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.end_split</element>
+            <position>14</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 16:58:46</sys_created_on>
+            <sys_id>365ad0c497703110fc05fa5ef053af73</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_vulnerability_response_integration" sys_domain="global" view="Default view">765ad0c497703110fc05fa5ef053af70</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 16:58:46</sys_updated_on>
+            <sys_user/>
+            <type>.end_split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>condition</element>
+            <position>15</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 16:58:46</sys_created_on>
+            <sys_id>b65ad0c497703110fc05fa5ef053af73</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_vulnerability_response_integration" sys_domain="global" view="Default view">765ad0c497703110fc05fa5ef053af70</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 16:58:46</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption/>
+            <header>false</header>
+            <name>x_1105186_anchore_vulnerability_response_integration</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 16:58:46</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>765ad0c497703110fc05fa5ef053af70</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_1105186_anchore_vulnerability_response_integration</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Vulnerability Response Integration with Anchore " source="x_1105186_anchore">80409a4e97603110fc05fa5ef053afce</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</sys_scope>
+            <sys_update_name>sys_ui_section_765ad0c497703110fc05fa5ef053af70</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 16:58:46</sys_updated_on>
+            <sys_user/>
+            <title>true</title>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_user_role">
+    <sys_user_role action="INSERT_OR_UPDATE">
+        <assignable_by/>
+        <can_delegate>true</can_delegate>
+        <description/>
+        <elevated_privilege>false</elevated_privilege>
+        <encryption_context/>
+        <grantable>true</grantable>
+        <includes_roles/>
+        <name>x_1105186_anchore.anchore_vulnerability_response_integration_user</name>
+        <requires_subscription>-1</requires_subscription>
+        <scoped_admin>false</scoped_admin>
+        <suffix>anchore_vulnerability_response_integration_user</suffix>
+        <sys_class_name>sys_user_role</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-16 16:53:55</sys_created_on>
+        <sys_id>3739944497703110fc05fa5ef053afe0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_1105186_anchore.anchore_vulnerability_response_integration_user</sys_name>
+        <sys_package display_value="Vulnerability Response Integration with Anchore " source="x_1105186_anchore">80409a4e97603110fc05fa5ef053afce</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</sys_scope>
+        <sys_update_name>sys_user_role_3739944497703110fc05fa5ef053afe0</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-16 16:53:55</sys_updated_on>
+    </sys_user_role>
+</record_update>

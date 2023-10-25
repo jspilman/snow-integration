@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_1105186_anchore.AnchoreImagesIntegration</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>AnchoreImagesIntegration</name>
+        <script><![CDATA[var AnchoreImagesIntegration = Class.create();
+AnchoreImagesIntegration.prototype =
+  Object.extendsObject(sn_vul.VulnerabilityIntegrationBase, {
+    configurationId: "d2431e8297a03110fc05fa5ef053aff5",
+    imageBatchSize: 50,
+    initialize: function (process, sourceType) { },
+    retrieveData: function () {
+      this.validateIntegration();
+      this.getConfig();
+      var obj = this.submitIntegrationJob();
+      this.integrationGr.update();
+      return obj;
+    },
+
+    validateIntegration: function () {
+      this.integrationSysId = this.integrationGr.sys_id + "";
+      this.integrationGr = new GlideRecord("sn_vul_integration");
+      if (!this.integrationGr.get(this.integrationSysId))
+        throw new Error("Integration not found");
+    },
+
+    getConfig: function () {
+      var configs = new GlideRecord("sn_sec_core_integration_item_config");
+
+      try {
+        configs.addQuery("integration", this.configurationId);
+        configs.query();
+        gs.info("AnchoreImagesIntegration - Found {0} Config Items", configs.getRowCount());
+      }
+      catch (ex) {
+        throw new Error("AnchoreImagesIntegration - getConfig() - Exception Querying Configuration: " + ex.message);
+      }
+
+      var configObj = {};
+      try {
+        while (configs.next()) {
+          var name = configs.getValue("name");
+          var varType = configs.getValue("elem_type").toLowerCase();
+          if (varType == "password" && !gs.nil(configs.password_value))
+            configObj[name] = configs.password_value.getDecryptedValue();
+          else if (varType == "boolean")
+            configObj[name] = configs.getValue("value") == "true";
+          else
+            configObj[name] = configs.getValue("value");
+        }
+      } catch (ex) {
+        throw new Error("AnchoreImagesIntegration - getConfig() - Exception Parsing Configuration: " + ex.message);
+      }
+
+      this.config = configObj;
+      this.procParams = this._getProcessParameters();
+    },
+
+    _anch_buildMessage: function (urlPath, reqBody) {
+      var authString = this.config.user + ":" + this.config.pass;
+      var b64AuthString = gs.base64Encode(authString);
+      var restMessage = new sn_ws.RESTMessageV2();
+      restMessage.setHttpMethod("get");
+      restMessage.setRequestHeader("Authorization", "Basic " + b64AuthString);
+      restMessage.setRequestHeader("Content-Type", "application/json");
+      restMessage.setEndpoint(this.config.url + urlPath);
+      restMessage.setMIDServer(this.config.mid);
+      restMessage.setEccParameter("skip_sensor", "true");
+      restMessage.setLogLevel("all");
+      restMessage.setHttpTimeout(15000);
+      if (reqBody) restMessage.setRequestBody(reqBody);
+      return restMessage;
+    },
+
+    getImageSummary: function () {
+      var getImageTags = this._anch_buildMessage("/v2/summaries/image-tags", "");
+      var imageTagsResp = null;
+      try {
+        imageTagsResp = getImageTags.execute();
+      } catch (ex) {
+        throw new Error("AnchoreImagesIntegration - getImageSummary() - Exception Getting Image List: " + ex.message);
+      }
+
+      if (imageTagsResp.haveError()) {
+        throw new Error("AnchoreImagesIntegration - getImageSummary() - Error Querying Image List: " + imageTagsResp.getErrorMessage());
+      }
+
+      var images;
+      try {
+        var imageTagsRespBody = imageTagsResp.getBody();
+        images = JSON.parse(imageTagsRespBody).items;
+      } catch (ex) {
+        throw new Error("AnchoreImagesIntegration - getImageSummary() - Exception Parsing Payload: " + ex.message);
+      }
+
+      // Sort and select the next batch of images to process...
+      var hasMoreData = false;
+      gs.info("AnchoreImagesIntegration - getImageSummary() - Found {0} Images", images.length);
+
+      try {
+        images = images.sort(function (a, b) { return a.image_digest > b.image_digest ? 1 : (a.image_digest < b.image_digest ? -1 : 0); });
+        if (this.procParams && this.procParams.lastDigest) {
+          // Follow-on Batch - Find the last iamge processed, and continue after that point
+          gs.info("AnchoreImagesIntegration - getImageSummary() - Resuming Processing at {0}", this.procParams.lastDigest);
+          var firstIndex = images.map(function (i) { return i.image_digest; }).indexOf(this.procParams.lastDigest) + 1;
+          var lastIndex = firstIndex + this.imageBatchSize;
+          hasMoreData = images.length > lastIndex;
+          images = images.slice(firstIndex, lastIndex);
+          gs.info("AnchoreImagesIntegration - getImageSummary() - Processing Images {0} - {1}", firstIndex + 1, firstIndex + images.length);
+        } else {
+          // First Batch - Start from the beginning, sorted by image_digest
+          hasMoreData = images.length > this.imageBatchSize;
+          if (hasMoreData) {
+            images = images.slice(0, this.imageBatchSize);
+          }          
+          gs.info("AnchoreImagesIntegration - getImageSummary() - Processing Images {0} - {1}", 1, images.length);
+        }
+      } catch (ex) {
+        throw new Error("AnchoreImagesIntegration - getImageSummary() - Exception Batching Images: " + ex.message);
+      }
+
+      try {
+        // Configure next run parameters...
+        this.hasMoreData(hasMoreData);
+        if (hasMoreData) {
+          this.setNextRunParameters({ lastDigest: images[images.length - 1].image_digest });
+        } else {
+          this.setNextRunParameters(null);
+        }
+      } catch (ex) {
+        throw new Error("AnchoreImagesIntegration - getImageSummary() - Exception Configuring Batches: " + ex.message);
+      }
+
+      return images;
+    },
+
+    getImageDetails: function (digest) {
+      var getImageDetails = this._anch_buildMessage("/v2/images/" + digest, "");
+      var resp = null;
+      try {
+        resp = getImageDetails.execute();
+      } catch (ex) {
+        throw new Error("AnchoreImagesIntegration - getImageDetails() - Exception Getting Image Details for '" + digest + "': " + ex.message);
+      }
+
+      if (resp.haveError()) {
+        throw new Error("AnchoreImagesIntegration - getImageDetails() - Error Querying Image Details for '" + digest + "': " + resp.getErrorMessage());
+      }
+
+      var details;
+      try {
+        details = JSON.parse(resp.getBody());
+      } catch (ex) {
+        throw new Error("AnchoreImagesIntegration - getImageDetails() - Exception Parsing Payload: " + ex.message);
+      }
+      return details;
+    },
+
+    submitIntegrationJob: function () {
+      var payload = { images: [] };
+      var images = this.getImageSummary();
+      for (var i = 0; i < images.length; i++) {
+        var details = this.getImageDetails(images[i].image_digest);
+
+        details.registry = details.image_detail[0].registry;
+        details.repo = details.image_detail[0].repo;
+        details.image_id = details.image_detail[0].image_id;
+        details.full_tag = details.image_detail[0].full_tag;
+        details.tag = details.image_detail[0].tag;
+        details.created_at = details.image_detail[0].created_at;
+        delete details.image_detail;
+
+        payload.images.push(details);
+      }
+
+      var fileName = this.integrationGr.name + "_" + new GlideDateTime().toString() + ".json";
+      var attachmentGr = new GlideSysAttachment();
+      var sys_id = attachmentGr.write(this.integrationProcessGr, fileName, "json", JSON.stringify(payload));
+      if (!sys_id) throw new Error("AnchoreImagesIntegration - submitIntegrationJob() - Failed to create attachment");
+
+      var obj = {
+        contents: sys_id,
+        contentType: "sys_attachment",
+        extension: "json",
+      };
+      return obj;
+    },
+    type: 'AnchoreImagesIntegration'
+  });
+]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-16 17:42:48</sys_created_on>
+        <sys_id>c434a84c97703110fc05fa5ef053af43</sys_id>
+        <sys_mod_count>38</sys_mod_count>
+        <sys_name>AnchoreImagesIntegration</sys_name>
+        <sys_package display_value="Vulnerability Response Integration with Anchore " source="x_1105186_anchore">80409a4e97603110fc05fa5ef053afce</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</sys_scope>
+        <sys_update_name>sys_script_include_c434a84c97703110fc05fa5ef053af43</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-09-28 07:40:14</sys_updated_on>
+    </sys_script_include>
+</record_update>

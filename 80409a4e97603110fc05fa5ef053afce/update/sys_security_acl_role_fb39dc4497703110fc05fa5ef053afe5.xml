@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role">
+    <sys_security_acl_role action="INSERT_OR_UPDATE">
+        <sys_class_name>sys_security_acl_role</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-16 16:53:56</sys_created_on>
+        <sys_id>fb39dc4497703110fc05fa5ef053afe5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_1105186_anchore_vulnerability_response_integration.x_1105186_anchore.anchore_vulnerability_response_integration_user</sys_name>
+        <sys_package display_value="Vulnerability Response Integration with Anchore " source="x_1105186_anchore">80409a4e97603110fc05fa5ef053afce</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</sys_scope>
+        <sys_security_acl display_value="x_1105186_anchore_vulnerability_response_integration">f339dc4497703110fc05fa5ef053afe3</sys_security_acl>
+        <sys_update_name>sys_security_acl_role_fb39dc4497703110fc05fa5ef053afe5</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-16 16:53:56</sys_updated_on>
+        <sys_user_role display_value="x_1105186_anchore.anchore_vulnerability_response_integration_user" name="x_1105186_anchore.anchore_vulnerability_response_integration_user">3739944497703110fc05fa5ef053afe0</sys_user_role>
+        <transaction_id/>
+    </sys_security_acl_role>
+</record_update>

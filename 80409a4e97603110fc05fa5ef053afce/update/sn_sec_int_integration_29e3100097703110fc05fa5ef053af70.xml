@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sn_sec_int_integration">
+    <sn_sec_int_integration action="INSERT_OR_UPDATE">
+        <banner_logo>4a449c8c97303110fc05fa5ef053afc5</banner_logo>
+        <categories>Vulnerability Response&#13;
+Container Security</categories>
+        <configurable>true</configurable>
+        <description>Anchore Vulnerabilty Integration</description>
+        <external_link/>
+        <help_link/>
+        <host_attributes_table/>
+        <id>com.snc.vulnerabilty.container.anchore</id>
+        <include_proof_in_vi_key>false</include_proof_in_vi_key>
+        <instance_setup_script/>
+        <integration_type>CONTAINERVUL</integration_type>
+        <ire_source_name/>
+        <is_auto_close_supported>true</is_auto_close_supported>
+        <is_multi_source_supported>true</is_multi_source_supported>
+        <is_reapply_ci_lookup_supported>false</is_reapply_ci_lookup_supported>
+        <lookup_by_network>false</lookup_by_network>
+        <name>Anchore Integration</name>
+        <order>100</order>
+        <pre_validation_script/>
+        <short_description>Anchore Vulnerability Integration</short_description>
+        <source>Anchore</source>
+        <sys_class_name>sn_sec_int_integration</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-16 16:32:07</sys_created_on>
+        <sys_id>29e3100097703110fc05fa5ef053af70</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Anchore Integration</sys_name>
+        <sys_package display_value="Vulnerability Response Integration with Anchore " source="x_1105186_anchore">80409a4e97603110fc05fa5ef053afce</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</sys_scope>
+        <sys_update_name>sn_sec_int_integration_29e3100097703110fc05fa5ef053af70</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-16 16:43:04</sys_updated_on>
+        <validation_script/>
+    </sn_sec_int_integration>
+</record_update>

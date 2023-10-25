@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="75229e299769f510fc05fa5ef053af54" extends="sys_import_set_row" label="Anchore Images Import" max_length="40" name="x_1105186_anchore_anchore_images_import" type="collection">
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=account_name" label="account_name" max_length="40" name="u_account_name" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=analysis_status" label="analysis_status" max_length="40" name="u_analysis_status" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=analyzed_at" label="analyzed_at" max_length="40" name="u_analyzed_at" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=annotations" label="annotations" max_length="40" name="u_annotations" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=created_at" label="created_at" max_length="40" name="u_created_at" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=full_tag" label="full_tag" max_length="40" name="u_full_tag" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=image_content" label="image_content" max_length="159" name="u_image_content" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=image_detail" label="image_detail" max_length="40" name="u_image_detail" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=image_digest" label="image_digest" max_length="71" name="u_image_digest" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=image_id" label="image_id" max_length="40" name="u_image_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=image_status" label="image_status" max_length="40" name="u_image_status" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=image_type" label="image_type" max_length="40" name="u_image_type" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=last_updated" label="last_updated" max_length="40" name="u_last_updated" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=parent_digest" label="parent_digest" max_length="71" name="u_parent_digest" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=registry" label="registry" max_length="40" name="u_registry" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=repo" label="repo" max_length="40" name="u_repo" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=tag" label="tag" max_length="40" name="u_tag" type="string"/>
+    </element>
+</database>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_scope_privilege">
+    <sys_scope_privilege action="INSERT_OR_UPDATE">
+        <operation>execute</operation>
+        <source_scope display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</source_scope>
+        <status>allowed</status>
+        <sys_class_name>sys_scope_privilege</sys_class_name>
+        <sys_created_by>VR.System</sys_created_by>
+        <sys_created_on>2023-09-28 03:58:18</sys_created_on>
+        <sys_id>1d148b61976df510fc05fa5ef053af95</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>ImportImage</sys_name>
+        <sys_package display_value="Vulnerability Response Integration with Anchore " source="x_1105186_anchore">80409a4e97603110fc05fa5ef053afce</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</sys_scope>
+        <sys_update_name>sys_scope_privilege_1d148b61976df510fc05fa5ef053af95</sys_update_name>
+        <sys_updated_by>VR.System</sys_updated_by>
+        <sys_updated_on>2023-09-28 03:58:18</sys_updated_on>
+        <target_name>ImportImage</target_name>
+        <target_scope display_value="Vulnerability Response and Configuration Compliance for Containers">2e42728ac8933010ba48c8fb8b6cf08a</target_scope>
+        <target_type>sys_script_include</target_type>
+    </sys_scope_privilege>
+</record_update>

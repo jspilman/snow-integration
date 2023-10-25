@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sn_sec_core_integration_item_config">
+    <sn_sec_core_integration_item_config action="INSERT_OR_UPDATE">
+        <elem_type>mid_server</elem_type>
+        <help_text/>
+        <integration display_value="Anchore Vulnerability Response Integration">d2431e8297a03110fc05fa5ef053aff5</integration>
+        <label>Midpoint Server</label>
+        <mandatory>true</mandatory>
+        <name>mid</name>
+        <order>400</order>
+        <password_value/>
+        <sys_class_name>sn_sec_core_integration_item_config</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-10 20:48:49</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_id>2b55d24697a03110fc05fa5ef053af40</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>mid</sys_name>
+        <sys_package display_value="Vulnerability Response Integration with Anchore " source="x_1105186_anchore">80409a4e97603110fc05fa5ef053afce</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</sys_scope>
+        <sys_update_name>sn_sec_core_integration_item_config_2b55d24697a03110fc05fa5ef053af40</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-09-22 14:59:53</sys_updated_on>
+        <type/>
+        <value>HomeMidServer</value>
+    </sn_sec_core_integration_item_config>
+</record_update>

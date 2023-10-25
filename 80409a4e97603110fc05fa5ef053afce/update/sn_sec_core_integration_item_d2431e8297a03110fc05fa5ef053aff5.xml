@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sn_sec_core_integration_item">
+    <sn_sec_core_integration_item action="INSERT_OR_UPDATE">
+        <banner_logo>7bb3d6c297a03110fc05fa5ef053afb4</banner_logo>
+        <capabilities/>
+        <categories>d7dd912b53221200158b7cbe1ec58753</categories>
+        <configurable>true</configurable>
+        <create_child_integration_item>false</create_child_integration_item>
+        <description/>
+        <external_link/>
+        <help_link/>
+        <install_script/>
+        <installed>false</installed>
+        <max_child_integration_item/>
+        <name>Anchore Vulnerability Response Integration</name>
+        <order>100</order>
+        <parent/>
+        <plugin_id>com.snc.vulnerability</plugin_id>
+        <short_description>The Anchore integration allows vulnerability data, detected by the third-party Anchore scanner, to be downloaded to the Vulnerability Response application for tracking, prioritization, and resolution.</short_description>
+        <sys_class_name>sn_sec_core_integration_item</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-10 20:40:40</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_id>d2431e8297a03110fc05fa5ef053aff5</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Anchore Vulnerability Response Integration</sys_name>
+        <sys_package display_value="Vulnerability Response Integration with Anchore " source="x_1105186_anchore">80409a4e97603110fc05fa5ef053afce</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</sys_scope>
+        <sys_update_name>sn_sec_core_integration_item_d2431e8297a03110fc05fa5ef053aff5</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-10 20:44:45</sys_updated_on>
+        <validation_script><![CDATA[validate(sysId, values);
+
+function validate(sysId, values){
+	//Set the value of "result" variable to non empty string if validation fails
+	result = "";
+}]]></validation_script>
+    </sn_sec_core_integration_item>
+    <sys_attachment action="INSERT_OR_UPDATE">
+        <average_image_color/>
+        <chunk_size_bytes>700000</chunk_size_bytes>
+        <compressed>true</compressed>
+        <content_type>image/svg+xml</content_type>
+        <encryption_context/>
+        <file_name>banner_logo</file_name>
+        <hash>72583fbb0e8d72f06fb1d3456334e7716afd6be9ef630c8d4fc103de39948afe</hash>
+        <image_height/>
+        <image_width/>
+        <size_bytes>5028</size_bytes>
+        <size_compressed>2253</size_compressed>
+        <state>available</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-10 20:41:17</sys_created_on>
+        <sys_id>7bb3d6c297a03110fc05fa5ef053afb4</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2023-08-10 20:41:17</sys_updated_on>
+        <table_name>ZZ_YYsn_sec_core_integration_item</table_name>
+        <table_sys_id>d2431e8297a03110fc05fa5ef053aff5</table_sys_id>
+    </sys_attachment>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>H4sIAAAAAAAAAA==</data>
+        <length>16</length>
+        <position>0</position>
+        <sys_attachment display_value="banner_logo" sys_id="7bb3d6c297a03110fc05fa5ef053afb4">7bb3d6c297a03110fc05fa5ef053afb4</sys_attachment>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-10 20:41:17</sys_created_on>
+        <sys_id>bbb3d6c297a03110fc05fa5ef053afb4</sys_id>
+    </sys_attachment_doc>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>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</data>
+        <length>2992</length>
+        <position>1</position>
+        <sys_attachment display_value="banner_logo" sys_id="7bb3d6c297a03110fc05fa5ef053afb4">7bb3d6c297a03110fc05fa5ef053afb4</sys_attachment>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-10 20:41:17</sys_created_on>
+        <sys_id>3fb3d6c297a03110fc05fa5ef053afb4</sys_id>
+    </sys_attachment_doc>
+</record_update>
