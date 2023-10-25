@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_fix">
+    <sys_script_fix action="DELETE">
+        <before>false</before>
+        <description/>
+        <name>Clear Vulns</name>
+        <record_for_rollback>true</record_for_rollback>
+        <script><![CDATA[var tables = ['sn_vul_container_image_vulnerable_item', 'sn_vul_container_image_findings',
+'sn_vul_container_image', 'sn_vul_container_image_package'];
+tables.forEach(function(table){
+var gr = new GlideRecord(table);
+gr.deleteMultiple();
+});]]></script>
+        <sys_class_name>sys_script_fix</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-10-10 19:58:43</sys_created_on>
+        <sys_id>51e2183197b13110fc05fa5ef053afed</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Clear Vulns</sys_name>
+        <sys_package display_value="Vulnerability Response Integration with Anchore " source="x_1105186_anchore">80409a4e97603110fc05fa5ef053afce</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</sys_scope>
+        <sys_update_name>sys_script_fix_51e2183197b13110fc05fa5ef053afed</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-10-10 19:58:43</sys_updated_on>
+        <unloadable>false</unloadable>
+    </sys_script_fix>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</application>
+        <file_path/>
+        <instance_id>8f65e42a1b6f6d5852a243f4bd4bcbe9</instance_id>
+        <instance_name>dev177796</instance_name>
+        <name>sys_script_fix_51e2183197b13110fc05fa5ef053afed</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_fix"&gt;&lt;sys_script_fix action="INSERT_OR_UPDATE"&gt;&lt;before&gt;false&lt;/before&gt;&lt;description/&gt;&lt;name&gt;Clear Vulns&lt;/name&gt;&lt;record_for_rollback&gt;true&lt;/record_for_rollback&gt;&lt;script&gt;&lt;![CDATA[var tables = ['sn_vul_container_image_vulnerable_item', 'sn_vul_container_image_findings',
+'sn_vul_container_image', 'sn_vul_container_image_package'];
+tables.forEach(function(table){
+var gr = new GlideRecord(table);
+gr.deleteMultiple();
+});]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_fix&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2023-10-10 19:58:43&lt;/sys_created_on&gt;&lt;sys_id&gt;51e2183197b13110fc05fa5ef053afed&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_name&gt;Clear Vulns&lt;/sys_name&gt;&lt;sys_package display_value="Vulnerability Response Integration with Anchore " source="x_1105186_anchore"&gt;80409a4e97603110fc05fa5ef053afce&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Vulnerability Response Integration with Anchore "&gt;80409a4e97603110fc05fa5ef053afce&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_fix_51e2183197b13110fc05fa5ef053afed&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2023-10-10 19:58:43&lt;/sys_updated_on&gt;&lt;unloadable&gt;false&lt;/unloadable&gt;&lt;/sys_script_fix&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-1036165691</payload_hash>
+        <record_name>Clear Vulns</record_name>
+        <reverted_from/>
+        <source>8840da8e97603110fc05fa5ef053afdd</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-10-10 19:58:43</sys_created_on>
+        <sys_id>07f2d43197b13110fc05fa5ef053afab</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18b1b2b963a0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-10-10 19:58:43</sys_updated_on>
+        <type>Fix Script</type>
+        <update_guid>4ff2d43192b131101eae9a87cbcbcfaa</update_guid>
+        <update_guid_history>4ff2d43192b131101eae9a87cbcbcfaa:-1036165691</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-10-10 19:59:20</sys_created_on>
+        <sys_db_object display_value="" name="sys_script_fix">sys_script_fix</sys_db_object>
+        <sys_id>0bd743fbe60843ada2c0fce4b3c3c3a9</sys_id>
+        <sys_metadata>51e2183197b13110fc05fa5ef053afed</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Clear Vulns</sys_name>
+        <sys_package display_value="Vulnerability Response Integration with Anchore " source="x_1105186_anchore">80409a4e97603110fc05fa5ef053afce</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</sys_scope>
+        <sys_scope_delete display_value="">8d9cf9fb7dbc48b4866a314522674ee4</sys_scope_delete>
+        <sys_update_name>sys_script_fix_51e2183197b13110fc05fa5ef053afed</sys_update_name>
+        <sys_update_version display_value="sys_script_fix_51e2183197b13110fc05fa5ef053afed">07f2d43197b13110fc05fa5ef053afab</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-10-10 19:59:20</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_1105186_anchore.AnchoreContainerVulnProcessor</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>AnchoreContainerVulnProcessor</name>
+        <script><![CDATA[var AnchoreContainerVulnProcessor = Class.create();
+AnchoreContainerVulnProcessor.prototype = {
+    configurationId: "d2431e8297a03110fc05fa5ef053aff5",
+    initialize: function (integrationGr, integrationProcessGr, importQueueEntryGr) {
+        if (integrationProcessGr) {
+            var process = new GlideRecord("sn_vul_integration_process");
+            process.get(integrationProcessGr);
+
+            this.instance = 'Anchore';
+            this.process = process.getValue("sys_id");
+            this.integrationProcessGr = integrationProcessGr;
+            this.integrationRun = integrationProcessGr.integration_run + '';
+            this.sourceInstance = integrationProcessGr.integration_run.implementation + '';
+            this.integration = integrationProcessGr.integration_run.implementation.integration + '';
+        }
+
+        this.import_counts = {
+            vi_created: 0,
+            vi_updated: 0,
+            vi_unchanged: 0,
+            vi_new_findings: 0,
+            det_created: 0,
+            det_updated: 0,
+            det_unchanged: 0
+        };
+
+        this.Finding = new sn_vul_container.Finding(this.integration, this.instance, this.integrationRun, this.process);
+        this.ImagePackage = new sn_vul_container.ImagePackage();
+        this._ciLookup = new sn_sec_cmn.CIIdentify();
+
+        this.getConfig();
+    },
+
+    getConfig: function () {
+        var configs = new GlideRecord("sn_sec_core_integration_item_config");
+        try {
+            configs.addQuery("integration", this.configurationId);
+            configs.query();
+            gs.info("AnchoreContainerVulnProcessor - Found {0} Config Items", configs.getRowCount());
+        }
+        catch (ex) {
+            throw new Error("AnchoreContainerVulnProcessor - getConfig() - Exception Querying Configuration: " + ex.message);
+        }
+
+        var configObj = {};
+        try {
+            while (configs.next()) {
+                var name = configs.getValue("name");
+                var varType = configs.getValue("elem_type").toLowerCase();
+                if (varType == "password" && !gs.nil(configs.password_value))
+                    configObj[name] = configs.password_value.getDecryptedValue();
+                else if (varType == "boolean")
+                    configObj[name] = configs.getValue("value") == "true";
+                else
+                    configObj[name] = configs.getValue("value");
+            }
+        } catch (ex) {
+            throw new Error("AnchoreContainerVulnProcessor - getConfig() - Exception Parsing Configuration: " + ex.message);
+        }
+        this.config = configObj;
+    },
+
+    completeProcess: function () {
+        try {
+            if (this.config.debug) gs.info('AnchoreContainerVulnProcessor - completeProcess');
+            var process = new GlideRecord("sn_vul_integration_process");
+            if (this.integrationProcessGr != null && process.get(this.integrationProcessGr)) {
+                process.setValue("vi_created", this.import_counts.vi_created); // Items - New Items
+                process.setValue("vi_updated", this.import_counts.vi_updated); // Items - Updated Items
+                process.setValue("vi_unchanged", this.import_counts.vi_unchanged); // Items - Unchanged Items
+                process.setValue("vi_new_findings", this.import_counts.vi_new_findings); // Items - Items with New Findings
+                process.setValue("import_vi", this.import_counts.vi_created + this.import_counts.vi_updated + this.import_counts.vi_unchanged); // Items - Imported Items
+                process.setValue("det_created", this.import_counts.det_created); // Findings - New Findings
+                process.setValue("det_updated", this.import_counts.det_updated); // Findings - Updated Findings
+                process.setValue("det_unchanged", this.import_counts.det_unchanged); // Findings - Unchanged Findings
+
+                process.update();
+                if (this.config.debug)
+                    gs.info('AnchoreContainerVulnProcessor - completeProcess - counts updated - ' + JSON.stringify(this.import_counts));
+            } else {
+                if (this.config.debug)
+                    gs.info('AnchoreContainerVulnProcessor - completeProcess - integrationProcessGr not found');
+            }
+        } catch (ex) {
+            throw new Error("AnchoreContainerVulnProcessor - completeProcess - Exception: " + ex.message);
+        }
+    },
+
+    processRecord: function (sourceGr) {
+        try {
+            // if (this.config.debug) gs.info("AnchoreContainerVulnProcessor - processRecord() - Processing");
+
+            var imageDigest = sourceGr.getValue("u_imagedigest").replace('sha256:', '');
+            var imageId = sourceGr.getValue("u_imageid");
+            var tag = sourceGr.getValue("u_tag");
+
+            var package_id = this._handlePackage(sourceGr);
+            var vuln_id = this._handleVuln(sourceGr);
+            var cmdb_id = this._handleImage(imageDigest);
+            var repoData = this._handleRepoFromTag(tag);
+            if (cmdb_id != null) {
+                var img_id = this._handleDiscoveredImage(imageId, cmdb_id, repoData);
+                if (this.config.debug)
+                    gs.info("AnchoreContainerVulnProcessor - processRecord() - Process Finding - Package: " + package_id + " Vuln: " + vuln_id +
+                        " CMDB ID: " + cmdb_id + " Image: " + img_id + " Repo: " + repoData + " Tag: " + tag);
+
+                var finding_id = this._handleFinding(sourceGr, package_id, vuln_id, cmdb_id, img_id, tag, repoData);
+                return finding_id;
+            } else {
+                gs.info("AnchoreContainerVulnProcessor - processRecord() - Image not Found: " + tag + " (Digest: " + imageDigest + ")");
+                return null;
+            }
+        } catch (ex) {
+            throw new Error("AnchoreContainerVulnProcessor - processRecord - Exception: " + ex.message);
+        }
+
+    },
+
+    // Handle looking up or creating a Container Repository for a given tag.
+    // The 'repo' is a substring of the 'tag', which is parsed two different ways by _tagToRepo().
+    //
+    // Try both ways to find an existing repo, and if one isn't found either way, then if we are
+    // configured to create repos, create one based on the 'canonical' form (which strips the domain name)
+    //
+    // Returns: List of [<Repo> <Repo Sys.ID>], or null if no repo found and we're configured to not add repos
+    _handleRepoFromTag: function (tag) {
+        // if (this.config.debug) gs.info("AnchoreContainerVulnProcessor - _handleRepoFromTag() - Tag: " + tag);
+        var repoId = null;
+
+        var repo = this._tagToRepo(tag, true); // First try with 'canonical' method to parse repo from tag
+        repoId = this._findRepo(repo);
+        if (repoId != null) return [repo, repoId];
+
+        var repo2 = this._tagToRepo(tag, false); // If not found, try Greedy method which does not strip the domain from 'repo'
+        repoId = this._findRepo(repo2);
+        if (repoId != null) return [repo2, repoId];
+
+        // We didn't find either one, so if configure to insert repo's, insert the canonical form
+        if (this.config.addrepo) {
+            if (this.config.debug)
+                gs.info("AnchoreContainerVulnProcessor - _handleRepoFromTag() - Creating Repo: " + repo);
+
+            gr.initialize();
+            gr.setValue("name", repo);
+            return [repo, gr.insert()];
+        } else {
+            return null;
+        }
+    },
+
+    _findRepo: function (repo) {
+        var gr = new GlideRecord("cmdb_ci_container_repository");
+        gr.addQuery("name", repo);
+        gr.query();
+        if (gr.next()) {
+            return gr.getValue("sys_id");
+        } else {
+            return null;
+        }
+    },
+
+    _handlePackage: function (sourceGr) {
+        // if (this.config.debug) gs.info("AnchoreContainerVulnProcessor - _handlePackage() - Entry");
+
+        var packageName = sourceGr.getValue("u_package_name");
+        var packageVersion = sourceGr.getValue("u_package_version");
+        var packages = {
+            type: sourceGr.getValue("u_package_type"),
+            path: sourceGr.getValue("u_package_path"),
+        };
+        var package_id = this.ImagePackage.insertorUpdatePackage(packages, packageName, packageVersion, "");
+        return package_id;
+    },
+
+    // Handle CVE and non-CVE vulnerabilities by READING or CREATING records in 'sn_vul_nvd_entry' or 'sn_vul_third_party_entry' tables
+    // using the Finding.insertOrUpdateVulnerabilty() helper function, which returns a sys.id for the corresponding CVE-ID.
+    //
+    // Third-party vulnerability (non-CVE IDs) require an extra step to tie them back to CVE IDs:
+    //   Anchore provides NVD IDs for 3rd party vulnerabilies, and these are stored as CSV items in the 'nvdids' property.
+    //   We make sure each of those is present in sn_vul_nvd_entry, collect their sys.id's, and then store them
+    //   as CSV into 'cves_list' of the non-CVE ID (sn_vuln_third_party_entry).
+    //
+    // Returns: sys.id of the CVE or non-CVE ID
+    _handleVuln: function (sourceGr) {
+        // if (this.config.debug) gs.info("AnchoreContainerVulnProcessor - _handleVuln() - Entry");
+
+        var vulnerability = sourceGr.getValue("u_vuln"); // the CVE-ID or 3rd Party ID
+        var vulnSysId = this.Finding.insertOrUpdateVulnerability(vulnerability);
+
+        if (vulnerability.substring(0, 3) !== "CVE") {
+            var nvdData = sourceGr.getValue("u_nvdids");
+            if (this.config.debug)
+                gs.info("AnchoreContainerVulnProcessor - _handleVuln - Importing NVD Data for Non-CVE Vuln '" + vulnerability + "': " + nvdData);
+
+            var nvdSysIdList = [];
+            try {
+                var nvdList = nvdData.split(',');
+                for (var i = 0; i < nvdList.length; i++) {
+                    var nvdSysId = this.Finding.insertOrUpdateVulnerability(nvdList[i]);
+
+                    // To fully link the CVEs, need to add a record in 'sn_vul_m2m_entry_cve'
+                    // connecting the vulnSysId for this vulnerabilty to the 
+                    var m2mGr = new GlideRecord("sn_vul_m2m_entry_cve");
+                    m2mGr.addQuery("sn_vul_entry", vulnSysId);
+                    m2mGr.addQuery("sn_vul_nvd_entry", nvdSysId);
+                    m2mGr.query();
+                    if (!m2mGr.next()) {
+                        m2mGr.initialize();
+                        m2mGr.setValue("sn_vul_entry", vulnSysId);
+                        m2mGr.setValue("sn_vul_nvd_entry", nvdSysId);
+                        m2mGr.insert();
+                    }
+                    if (this.config.debug)
+                        gs.info("AnchoreContainerVulnProcessor - _handleVuln - Inserted Underlying CVE: " + nvdList[i] + " as Finding: " + nvdSysId);
+
+                    nvdSysIdList.push(nvdSysId);
+                }
+            } catch (ex) {
+                if (this.config.debug)
+                    gs.error("AnchoreContainerVulnProcessor - _handleVuln - Exception Linking NVD Data: " + ex.message);
+            }
+
+            // Last step is putting a comma separated list of the NVD CVE IDs
+            // into the 'cves_list' field of the 3rd-party vuln
+            if (nvdSysIdList.length > 0) {
+                nvdSysIdList = nvdSysIdList.join(',');
+
+                var myVuln = new GlideRecord("sn_vul_third_party_entry");
+                myVuln.get(vulnSysId);
+                myVuln.setValue("cves_list", nvdSysIdList);
+                myVuln.update();
+
+                if (this.config.debug)
+                    gs.info("AnchoreContainerVulnProcessor - _handleVuln - Linked CVEs: " + nvdSysIdList);
+            }
+        }
+        return vulnSysId;
+    },
+
+    // Handle Image:
+    //   Using the image digest, identify the target Docker Image by invoking the configured CI Lookup Rule,
+    //   and then confirm the returned sys_id is present in the 'cmdb_ci' table
+    //   Returns: CMDB_ID Record ID
+    _handleImage: function (imageDigest) {
+        // if (this.config.debug) gs.info("AnchoreContainerVulnProcessor - _handleImage() - Entry");
+
+        // The 'imageObj' object is passed to the configure CI Lookup Rule to identify the matching docker image record
+        // Additional properties can be added in, if additional information is required to perform the correct lookup
+        var imageObj = {
+            imageDigest: imageDigest,
+        };
+
+        var match = this._ciLookup.identify(this.integration, imageObj, true);
+        if (!match || !match.ci || !match.ci.mainCi) {
+            if (this.config.debug)
+                gs.warn('AnchoreContainerVulnProcessor - _handleImage() - CI Lookup Failed for Digest: ' + imageDigest);
+            return null;
+        }
+
+        // Confirm the returned value matches a record in the 'cmdb_ci' table
+        var ciGr = new GlideRecord('cmdb_ci');
+        if (!ciGr.get(match.ci.mainCi)) {
+            if (this.config.debug)
+                gs.warn('AnchoreContainerVulnProcessor - _handleImage() - CMDB_CI Lookup Failed for Digest: ' + imageDigest);
+            return null;
+        }
+
+        var imageTag = ciGr.getValue("name");
+
+        return match.ci.mainCi;
+    },
+
+    // Handle Discovered Image
+    //   Once a CMDB_CI row is found, READ or CREATE a 'Discovered Container Image' in 'sn_vul_container_image' table.
+    //   Returns: sys.id of the Discovered Container Image
+    _handleDiscoveredImage: function (imageId, ciId, repoData) {
+        // if (this.config.debug) gs.info("AnchoreContainerVulnProcessor - _handleDiscoveredImage() - Entry");
+        var sys_id;
+        var gr = new GlideRecord("sn_vul_container_image");
+        gr.addQuery("image_id", imageId);
+        gr.addQuery("source", this.sourceInstance);
+        gr.setLimit(1);
+        gr.query();
+        if (gr.next()) {
+            sys_id = gr.getValue("sys_id");
+            if (this.config.debug)
+                gs.info("AnchoreContainerVulnProcessor - _handleDiscoveredImage() - Found ID: " + sys_id + " - Image ID: " + imageId);
+            return sys_id;
+        } else {
+            gr.initialize();
+            gr.setValue("source", this.sourceInstance);
+            gr.setValue("cmdb_ci", ciId);
+            gr.setValue("image_id", imageId);
+            gr.setValue("integration_run", this.integrationRun);
+            if (repoData != null)
+                gr.setValue("image_repository", repoData[1]); // sys.id of the repo
+            sys_id = gr.insert();
+            if (this.config.debug)
+                gs.info("AnchoreContainerVulnProcessor - _handleDiscoveredImage() - Inserted ID: " + sys_id + " Image ID: " + imageId);
+            return sys_id;
+        }
+    },
+
+    // Handle Base Docker Image
+    //   Vulns detected in an APP image may be on the BASE image layer, in which case we want to create the finding
+    //   marked as 'Base Image' = true. To do this, we mark the 'baseImageName' (tag) and 'is_base_image' fields on the
+    //   finding obejct passed to createFinding(). Inside there, it will expect an 'sn_vul_container_image' record exists.
+    //
+    //   Here we check to see if that record exists, and if not, we try to find the underlying Docker Image in
+    //   the cmdb_ci table, and as long as the Docker Image exists, we can create an sn_vul_container_image
+    //   record before trying to create the finding.
+    //
+    // Returns: Docker Image Name (tag) for the Base Image
+    _handleBaseDockerImage: function (baseImageTag, baseImageDigest, appImageRepoData) {
+        var sys_id;
+        var gr = new GlideRecord("sn_vul_container_image");
+        gr.addQuery("cmdb_ci.name", baseImageTag);
+        gr.addQuery("source", this.sourceInstance);
+        gr.setLimit(1);
+        gr.query();
+
+        if (gr.next()) {
+            sys_id = gr.getValue("cmdb_ci");
+            if (this.config.debug)
+                gs.info("AnchoreContainerVulnProcessor - _handleBaseDockerImage() - Found Base ID: " + sys_id + " for Tag: " + baseImageTag);
+            return baseImageTag;
+        }
+
+        if (this.config.debug)
+            gs.info("AnchoreContainerVulnProcessor - _handleBaseDockerImage() - Could not Find Base ID for: " + baseImageTag);
+
+        // We did not find a row in sn_vuln_container_image... 
+        // Query for the underlying Docker Image by DIGEST in order to get the Image ID
+        var baseCi = this._handleImage(baseImageDigest);
+        if (baseCi == null) {
+            if (this.config.debug)
+                gs.info("AnchoreContainerVulnProcessor - _handleBaseDockerImage() - Could not find base Docker Image using CILookup - Tag: " +
+                    baseImageTag + " - Digest: " + baseImageDigest);
+
+            // If Base Images are not stored in SNOW, we can return null here and 'baseImageTag' will remain un-set in the Finding
+            // but the 'Base Image' box will still be checked for this vuln
+            return null;
+        }
+
+        // We have 'baseCi' so we know the record exists - query it for the Image ID
+        var ciGr = new GlideRecord('cmdb_ci_docker_image');
+        ciGr.get(baseCi);
+        var baseImageId = ciGr.getValue("image_id");
+        var snowBaseImageTag = ciGr.getValue("name");
+
+        // Verify we have a 'repo' setup for this base image (likely it's the same as the APP image)
+        var baseImageRepoData = null;
+        if (appImageRepoData != null) {
+            // First check if our base image looks like the same repo as the app image
+            // We have to parse the base image two different ways and check both of them
+            if (this._tagToRepo(baseImageTag, false) == appImageRepoData[0] || this._tagToRepo(baseImageTag, true) == appImageRepoData[0]) {
+                baseImageRepoData = appImageRepoData;
+            }
+        }
+        if (baseImageRepoData == null) {
+            // We didn't match the base image repo to the app image repo
+            // We can still look for a base image repo that matches the base tag though...
+            baseImageRepoData = this._handleRepoFromTag(baseImageTag);
+        }
+
+        // It's possible the baseImageTag we got back from Anchore doesn't match what SNOW has for a Base Tag
+        // Let's try again to find it now that we have an Image ID
+        if (snowBaseImageTag != baseImageTag) {
+            sys_id = this._handleDiscoveredImage(baseImageId, baseCi, baseImageRepoData);
+            if (this.config.debug)
+                gs.info("AnchoreContainerVulnProcessor - _handleBaseDockerImage() - Found BASE Image ID: " + baseImageId + " With Alternate Tag: " +
+                    snowBaseImageTag);
+            return snowBaseImageTag;
+        }
+
+        if (this.config.debug)
+            gs.info("AnchoreContainerVulnProcessor - _handleBaseDockerImage() - Inserting SnVulContainerImage for BASE Image ID: " +
+                baseImageId + " Tag: " + baseImageTag);
+
+        gr.initialize();
+        gr.setValue("source", this.sourceInstance);
+        gr.setValue("cmdb_ci", baseCi);
+        gr.setValue("image_id", baseImageId);
+        gr.setValue("integration_run", this.integrationRun);
+        if (baseImageRepoData != null)
+            gr.setValue("image_repository", baseImageRepoData[1]);
+        sys_id = gr.insert();
+        return baseImageTag;
+    },
+
+
+    _handleFinding: function (sourceGr, package_id, vuln_id, cmdb_id, img_id, tag, repoData) {
+        // if (this.config.debug) gs.info("AnchoreContainerVulnProcessor - _handleFinding() - Entry");
+
+        var cveId = sourceGr.getValue("u_vuln");
+        var detectedAt = sourceGr.getValue("u_detected_at");
+        var baseTag = sourceGr.getValue("u_basetag");
+        var baseDigest = sourceGr.getValue("u_basedigest");
+
+        try {
+            var finding = this.Finding.newFinding();
+            finding.vulnerabilityId = cveId;
+            finding.vulnerability = vuln_id;
+            finding.src_ci = img_id;
+            finding.cmdb_ci = cmdb_id;
+            finding.package = package_id;
+            finding.packages = package_id;
+            finding.last_found = detectedAt;
+            finding.first_found = detectedAt;
+            finding.status = "Open";
+            finding.source = 'Anchore';
+            finding.integration = this.integration;
+            finding.integration_run = this.integrationProcessGr.integration_run;
+
+            if (repoData != null)
+                finding.image_repository = repoData[1];
+
+            var isBase = baseTag != null && baseTag.length > 0;
+            finding.is_base_image = isBase;
+            if (isBase) {
+                // Verify we have a record in sn_vul_container_image for the BASE image
+                baseImageTag = this._handleBaseDockerImage(baseTag, baseDigest, repoData);
+
+                // Script Include for 'FindingsBase' (Sys ID: 767d1fba53617010e485ddeeff7b120e) implements 'createFinding'
+                // Inside createFinding if 'is_base_image' = True then it will call _getBaseDockerImage() which queries
+                // 'sn_vul_container_image' with;
+                //    "cmdb_ci.name" = finding.baseImageName
+                //    "source"       = finding.integration_run.implementation
+                finding.baseImageName = baseImageTag;
+            }
+
+            if (this.config.debug) {
+                if (isBase) {
+                    gs.info("AnchoreContainerVulnProcessor - _handleFinding() - " + finding.vulnerabilityId + " in APP: " + tag + " on BASE: " +
+                        baseImageTag);
+                } else {
+                    gs.info("AnchoreContainerVulnProcessor - _handleFinding() - " + finding.vulnerabilityId + " in APP: " + tag);
+                }
+            }
+
+            var findingData = this.Finding.createFinding(finding);
+
+            // Copy counters from Finding object to track stats of what was inserted/updated/unchanged...
+            this.import_counts.vi_created += this.Finding.inserted.vis
+            this.import_counts.vi_updated += this.Finding.updated.vis
+            this.import_counts.vi_unchanged += this.Finding.ignored.vis // 'Ignored' inside Findings is actually tracked as 'Unchanged'
+            this.import_counts.vi_new_findings += this.Finding.updated.visNewFinds
+            this.import_counts.det_created += this.Finding.inserted.finds;
+            this.import_counts.det_updated += this.Finding.updated.finds;
+            this.import_counts.det_unchanged += this.Finding.ignored.finds; // 'Ignored' inside Findings is actually tracked as 'Unchanged'
+
+            if (this.config.debug) {
+                gs.info("AnchoreContainerVulnProcessor - _handleFinding() - " + finding.vulnerabilityId + " - Finding Created/Updated: " +
+                    JSON.stringify(findingData));
+            }
+
+            return findingData;
+        } catch (ex) {
+            gs.warn("AnchoreContainerVulnProcessor - _handleFinding() - Exception Creating Finding: " + ex.message);
+            return null;
+        }
+    },
+
+    _tagToRepo: function (tag, isGreedy) {
+        // Non-Greedy Algorithm does not include domain name as part of the REPO:
+        //
+        // 1. look for / in 'tag'
+        // 2. If / found, split 'tag' into 2 parts by first / and test text left of /, to look for "." or ":"
+        // 2a.  If ("." or ":" found in text left of 1st /)
+        //        Then repo is everything after first slash until next ':'
+        // 2b.  If (".", ":", or "localhost" not found in text left of 1st /)
+        //        Then repo is everything from start of string until first ':'
+        // 3. If / not found 
+        //     Then repo is everything left of any ':', or entire tag if no ':'
+        //
+        // Greedy Algorithm is much simpler - everything left of the ':' is considered repo
+        var firstSlash = tag.indexOf('/');
+        var firstColon = tag.indexOf(':');
+
+        // Step 1
+        if (firstSlash >= 0 && !isGreedy) {
+            // Step 2
+            var firstPart = tag.substring(0, firstSlash);
+            if (firstPart.indexOf('.') >= 0 || firstPart.indexOf(':') >= 0) {
+                // Step 2a
+                var repo = tag.substring(firstSlash + 1);
+                var secondColon = repo.indexOf(':');
+                if (secondColon >= 0) {
+                    return repo.substring(0, secondColon);
+                } else {
+                    return repo;
+                }
+            }
+        }
+
+        // Step 3 and also fallthrough of Step 2b / Greedy Algorithm
+        if (firstColon >= 0) {
+            return tag.substring(0, firstColon);
+        } else {
+            return tag;
+        }
+    },
+
+    type: 'AnchoreContainerVulnProcessor'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-16 19:11:19</sys_created_on>
+        <sys_id>8a87f80497f03110fc05fa5ef053aff1</sys_id>
+        <sys_mod_count>64</sys_mod_count>
+        <sys_name>AnchoreContainerVulnProcessor</sys_name>
+        <sys_package display_value="Vulnerability Response Integration with Anchore " source="x_1105186_anchore">80409a4e97603110fc05fa5ef053afce</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</sys_scope>
+        <sys_update_name>sys_script_include_8a87f80497f03110fc05fa5ef053aff1</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-10-25 17:58:41</sys_updated_on>
+    </sys_script_include>
+</record_update>

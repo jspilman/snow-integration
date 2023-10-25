@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module">
+    <sys_app_module action="DELETE">
+        <active>true</active>
+        <application display_value="Anchore Vulnerability Integration">f6c8d04497703110fc05fa5ef053afeb</application>
+        <assessment/>
+        <device_type/>
+        <filter/>
+        <hint/>
+        <homepage/>
+        <image/>
+        <link_type>LIST</link_type>
+        <map_page/>
+        <mobile_title>Anchore Vulnerability Integrations</mobile_title>
+        <mobile_view_name>Mobile</mobile_view_name>
+        <name>x_1105186_anchore_x_anchore_vulnerability_integration</name>
+        <order/>
+        <override_menu_roles>false</override_menu_roles>
+        <query/>
+        <report/>
+        <roles>x_1105186_anchore.anchore_vulnerability_integration_user</roles>
+        <sys_class_name>sys_app_module</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-16 16:51:57</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>cfc8d04497703110fc05fa5ef053afee</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Anchore Vulnerability Integrations</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Vulnerability Response Integration with Anchore " source="x_1105186_anchore">80409a4e97603110fc05fa5ef053afce</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</sys_scope>
+        <sys_update_name>sys_app_module_cfc8d04497703110fc05fa5ef053afee</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-16 16:51:57</sys_updated_on>
+        <timeline_page/>
+        <title>Anchore Vulnerability Integrations</title>
+        <uncancelable>false</uncancelable>
+        <view_name/>
+        <window_name/>
+    </sys_app_module>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</application>
+        <file_path/>
+        <instance_id>8f65e42a1b6f6d5852a243f4bd4bcbe9</instance_id>
+        <instance_name>dev177796</instance_name>
+        <name>sys_app_module_cfc8d04497703110fc05fa5ef053afee</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module"><sys_app_module action="INSERT_OR_UPDATE"><active>true</active><application display_value="Anchore Vulnerability Integration">f6c8d04497703110fc05fa5ef053afeb</application><assessment/><device_type/><filter/><hint/><homepage/><image/><link_type>LIST</link_type><map_page/><mobile_title>Anchore Vulnerability Integrations</mobile_title><mobile_view_name>Mobile</mobile_view_name><name>x_1105186_anchore_x_anchore_vulnerability_integration</name><order/><override_menu_roles>false</override_menu_roles><query/><report/><roles>x_1105186_anchore.anchore_vulnerability_integration_user</roles><sys_class_name>sys_app_module</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-16 16:51:57</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>cfc8d04497703110fc05fa5ef053afee</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Anchore Vulnerability Integrations</sys_name><sys_overrides/><sys_package display_value="Vulnerability Response Integration with Anchore " source="x_1105186_anchore">80409a4e97603110fc05fa5ef053afce</sys_package><sys_policy/><sys_scope display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</sys_scope><sys_update_name>sys_app_module_cfc8d04497703110fc05fa5ef053afee</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-16 16:51:57</sys_updated_on><timeline_page/><title>Anchore Vulnerability Integrations</title><uncancelable>false</uncancelable><view_name/><window_name/></sys_app_module></record_update>]]></payload>
+        <payload_hash>1020470218</payload_hash>
+        <record_name>Anchore Vulnerability Integrations</record_name>
+        <reverted_from/>
+        <source>8840da8e97603110fc05fa5ef053afdd</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-16 16:51:57</sys_created_on>
+        <sys_id>03c8d04497703110fc05fa5ef053aff2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>189ff42d6cb0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-16 16:51:57</sys_updated_on>
+        <type>Module</type>
+        <update_guid>4bc8d044fa703110c4cfac4e1d8eeff1</update_guid>
+        <update_guid_history>4bc8d044fa703110c4cfac4e1d8eeff1:1020470218</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Anchore Vulnerability Integrations">66e8184497703110fc05fa5ef053af54</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-16 16:52:28</sys_created_on>
+        <sys_db_object display_value="" name="sys_app_module">sys_app_module</sys_db_object>
+        <sys_id>169b7b717acf4e5e82af275e2264b9a1</sys_id>
+        <sys_metadata>cfc8d04497703110fc05fa5ef053afee</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Anchore Vulnerability Integrations</sys_name>
+        <sys_package display_value="Vulnerability Response Integration with Anchore " source="x_1105186_anchore">80409a4e97603110fc05fa5ef053afce</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</sys_scope>
+        <sys_scope_delete display_value="">8d9cf9fb7dbc48b4866a314522674ee4</sys_scope_delete>
+        <sys_update_name>sys_app_module_cfc8d04497703110fc05fa5ef053afee</sys_update_name>
+        <sys_update_version display_value="sys_app_module_cfc8d04497703110fc05fa5ef053afee">03c8d04497703110fc05fa5ef053aff2</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-16 16:52:28</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

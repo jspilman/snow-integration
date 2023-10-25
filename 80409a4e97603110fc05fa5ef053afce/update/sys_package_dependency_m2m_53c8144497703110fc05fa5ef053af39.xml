@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_package_dependency_m2m">
+    <sys_package_dependency_m2m action="INSERT_OR_UPDATE">
+        <dependency display_value="Vulnerability Response" source="sn_vul">054cdcc2ff200200158bffffffffff94</dependency>
+        <min_version>19.0.4</min_version>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-16 16:51:58</sys_created_on>
+        <sys_id>53c8144497703110fc05fa5ef053af39</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_package display_value="Vulnerability Response Integration with Anchore " source="x_1105186_anchore">80409a4e97603110fc05fa5ef053afce</sys_package>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-16 16:51:58</sys_updated_on>
+    </sys_package_dependency_m2m>
+</record_update>

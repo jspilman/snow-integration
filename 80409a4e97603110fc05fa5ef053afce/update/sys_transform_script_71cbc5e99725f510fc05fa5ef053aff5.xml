@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_transform_script">
+    <sys_transform_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <map display_value="Anchore Images Transform Map">96aa81e99725f510fc05fa5ef053af16</map>
+        <order>100</order>
+        <script><![CDATA[(function runTransformScript(source, map, log, target) {
+	ignore=true;
+	x_1105186_anchore.processor.processRecord(source);
+})(source, map, log, target);]]></script>
+        <sys_class_name>sys_transform_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-09-27 19:12:48</sys_created_on>
+        <sys_id>71cbc5e99725f510fc05fa5ef053aff5</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>onBefore</sys_name>
+        <sys_package display_value="Vulnerability Response Integration with Anchore " source="x_1105186_anchore">80409a4e97603110fc05fa5ef053afce</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</sys_scope>
+        <sys_update_name>sys_transform_script_71cbc5e99725f510fc05fa5ef053aff5</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-09-28 04:08:30</sys_updated_on>
+        <when>onBefore</when>
+    </sys_transform_script>
+</record_update>

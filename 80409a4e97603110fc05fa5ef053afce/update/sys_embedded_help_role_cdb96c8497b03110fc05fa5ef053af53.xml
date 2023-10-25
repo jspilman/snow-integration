@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_embedded_help_role">
+    <sys_embedded_help_role action="INSERT_OR_UPDATE">
+        <order>1000</order>
+        <role display_value="x_1105186_anchore.anchore_vulnerabilty_import_user" name="x_1105186_anchore.anchore_vulnerabilty_import_user">0db96c8497b03110fc05fa5ef053af51</role>
+        <sys_class_name>sys_embedded_help_role</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-16 18:05:50</sys_created_on>
+        <sys_id>cdb96c8497b03110fc05fa5ef053af53</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>0db96c8497b03110fc05fa5ef053af51</sys_name>
+        <sys_package display_value="Vulnerability Response Integration with Anchore " source="x_1105186_anchore">80409a4e97603110fc05fa5ef053afce</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</sys_scope>
+        <sys_update_name>sys_embedded_help_role_cdb96c8497b03110fc05fa5ef053af53</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-08-16 18:05:50</sys_updated_on>
+    </sys_embedded_help_role>
+</record_update>

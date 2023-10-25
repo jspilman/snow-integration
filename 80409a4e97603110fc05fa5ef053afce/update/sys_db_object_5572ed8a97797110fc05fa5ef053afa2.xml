@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_db_object">
+    <sys_db_object action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <actions_access>false</actions_access>
+        <alter_access>false</alter_access>
+        <caller_access/>
+        <client_scripts_access>false</client_scripts_access>
+        <configuration_access>false</configuration_access>
+        <create_access>false</create_access>
+        <create_access_controls>true</create_access_controls>
+        <delete_access>false</delete_access>
+        <is_extendable>false</is_extendable>
+        <label>Anchore Vulnerability Import</label>
+        <live_feed_enabled>false</live_feed_enabled>
+        <name>x_1105186_anchore_anchore_vulnerability_import</name>
+        <number_ref/>
+        <provider_class/>
+        <read_access>true</read_access>
+        <scriptable_table>false</scriptable_table>
+        <super_class display_value="Import Set Row" name="sys_import_set_row">0a0f50f2d423211095d7c105f1bf4341</super_class>
+        <sys_class_name>sys_db_object</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-10-11 20:25:31</sys_created_on>
+        <sys_id>5572ed8a97797110fc05fa5ef053afa2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Anchore Vulnerability Import</sys_name>
+        <sys_package display_value="Vulnerability Response Integration with Anchore " source="x_1105186_anchore">80409a4e97603110fc05fa5ef053afce</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</sys_scope>
+        <sys_update_name>sys_db_object_5572ed8a97797110fc05fa5ef053afa2</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-10-11 20:25:31</sys_updated_on>
+        <update_access>false</update_access>
+        <user_role display_value="x_1105186_anchore.anchore_vulnerability_import_user" name="x_1105186_anchore.anchore_vulnerability_import_user">a5b2ad4a97797110fc05fa5ef053af6a</user_role>
+        <ws_access>true</ws_access>
+    </sys_db_object>
+</record_update>

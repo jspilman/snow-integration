@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_1105186_anchore.AnchoreContainerVulnIntegration</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>AnchoreContainerVulnIntegration</name>
+        <script><![CDATA[var AnchoreContainerVulnIntegration = Class.create();
+AnchoreContainerVulnIntegration.prototype = Object.extendsObject(
+    sn_vul.VulnerabilityIntegrationBase,
+    {
+        configurationId: "d2431e8297a03110fc05fa5ef053aff5",
+        anchoreImages: null,
+        initialize: function (process, sourceType) { },
+        retrieveData: function () {
+            this.validateIntegration();
+            this.getConfig();
+            var obj = this.submitIntegrationJob();
+            this.integrationGr.update();
+            return obj;
+        },
+
+        validateIntegration: function () {
+            this.integrationSysId = this.integrationGr.sys_id + "";
+            this.integrationGr = new GlideRecord("sn_vul_integration");
+            if (!this.integrationGr.get(this.integrationSysId)) {
+                throw new Error("AnchoreContainerVulnIntegration - validateIntegration() - Integration not found");
+            }
+        },
+
+        getConfig: function () {
+            var configs = new GlideRecord("sn_sec_core_integration_item_config");
+
+            try {
+                configs.addQuery("integration", this.configurationId);
+                configs.query();
+                gs.info("AnchoreContainerVulnIntegration - Found {0} Config Items", configs.getRowCount());
+            }
+            catch (ex) {
+                throw new Error("AnchoreContainerVulnIntegration - getConfig() - Exception Querying Configuration: " + ex.message);
+            }
+
+            var configObj = {};
+            try {
+                while (configs.next()) {
+                    var name = configs.getValue("name");
+                    var varType = configs.getValue("elem_type").toLowerCase();
+                    if (varType == "password" && !gs.nil(configs.password_value))
+                        configObj[name] = configs.password_value.getDecryptedValue();
+                    else if (varType == "boolean")
+                        configObj[name] = configs.getValue("value") == "true";
+                    else
+                        configObj[name] = configs.getValue("value");
+                }
+            } catch (ex) {
+                throw new Error("AnchoreContainerVulnIntegration - getConfig() - Exception Parsing Configuration: " + ex.message);
+            }
+
+            this.config = configObj;
+            this.procParams = this._getProcessParameters();
+        },
+
+        _anch_buildMessage: function (urlPath, reqBody) {
+            var authString = this.config.user + ":" + this.config.pass;
+            var b64AuthString = gs.base64Encode(authString);
+            var restMessage = new sn_ws.RESTMessageV2();
+            restMessage.setHttpMethod("get");
+            restMessage.setRequestHeader("Authorization", "Basic " + b64AuthString);
+            restMessage.setRequestHeader("Content-Type", "application/json");
+            restMessage.setEndpoint(this.config.url + urlPath);
+            restMessage.setMIDServer(this.config.mid);
+            restMessage.setEccParameter("skip_sensor", "true");
+            restMessage.setLogLevel("all");
+            restMessage.setHttpTimeout(15000);
+            if (reqBody) restMessage.setRequestBody(reqBody);
+            return restMessage;
+        },
+
+        getDigests: function () {
+            var snowImages = [];
+            var dockerImgGr = new GlideRecord("cmdb_ci_docker_image");
+            dockerImgGr.addEncodedQuery(this.config.query);
+            dockerImgGr.query();
+            while (dockerImgGr.next()) {
+                var imageDigest = dockerImgGr.getValue("image_digest");
+                var imageId = dockerImgGr.getValue("image_id");
+                snowImages.push({ digest: imageDigest, id: imageId });
+            }
+
+            var hasMoreData = false;
+            if (this.config.debug)
+                gs.info("AnchoreContainerVulnIntegration - getDigests() - Found {0} Images in SNOW", snowImages.length);
+
+            // Retrieve all Anchore Images, and remove any missing from our query list
+            var getImageTags = this._anch_buildMessage("/v2/summaries/image-tags", ""); // "/v2/summaries/image-tags"
+            var imageTagsResp = null;
+            try {
+                imageTagsResp = getImageTags.execute();
+            } catch (ex) {
+                throw new Error("AnchoreContainerVulnIntegration - getImageSummary() - Exception Getting Image Summary from Anchore: " + ex.message);
+            }
+
+            if (imageTagsResp.haveError()) {
+                throw new Error("AnchoreContainerVulnIntegration - getImageSummary() - Error '" + imageTagsResp.getStatusCode() +
+                    "' while Querying Image Summary from Anchore: " + imageTagsResp.getErrorMessage());
+            }
+
+            try {
+                var imageTagsRespBody = imageTagsResp.getBody();
+                var anchoreImagesList = JSON.parse(imageTagsRespBody).items;
+                this.anchoreImages = anchoreImagesList.reduce(function (map, image) {
+                    map[image.image_digest] = image.full_tag;
+                    return map;
+                }, {});
+            } catch (ex) {
+                gs.warn('AnchoreContainerVulnIntegration - getImageSummary() - Anchore Image Summary Query returned 200-OK, but could not be parsed.' +
+                    ' Recommend checking the ECC Queue for errors returned by the Mid server.');
+                throw new Error("AnchoreContainerVulnIntegration - getImageSummary() - Exception Parsing Image Summary Payload: " + ex.message);
+            }
+            if (this.config.debug)
+                gs.info("AnchoreContainerVulnIntegration - getDigests() - Found {0} Images in Anchore", Object.keys(this.anchoreImages).length);
+
+            // Iterate through all images returned by SNOW and skip any that are missing from Anchore
+            // Saves time by eliminating missing images with a single API call to Anchore
+            var missingCount = 0;
+            var dockerImages = [];
+            for (var i = 0; i < snowImages.length; i++) {
+                var shaDigest = snowImages[i].digest.startsWith('sha256') ? snowImages[i].digest : "sha256:" + snowImages[i].digest;
+                if (shaDigest in this.anchoreImages) {
+                    snowImages[i].tag = this.anchoreImages[shaDigest];
+                    dockerImages.push(snowImages[i]);
+                } else {
+                    if (this.config.debug)
+                        gs.info("AnchoreContainerVulnIntegration - submitIntegrationJob() - Missing Image: " + shaDigest);
+                    missingCount++;
+                }
+            }
+
+            if (this.config.debug) {
+                if (missingCount > 0) {
+                    gs.info("AnchoreContainerVulnIntegration - submitIntegrationJob() - Missing Images in Anchore from SNOW: " + missingCount);
+                } else {
+                    gs.info("AnchoreContainerVulnIntegration - submitIntegrationJob() - All SNOW Images Found in Anchore");
+                }
+            }
+
+            if (dockerImages.length == 0) {
+                this.hasMoreData(false);
+                this.setNextRunParameters(null);
+                return [];
+            }
+
+            try {
+                images = dockerImages.sort(function (a, b) { return a.digest > b.digest ? 1 : (a.digest < b.digest ? -1 : 0); });
+                if (this.procParams && this.procParams.lastDigest) {
+                    // Follow-on Batch - Find the last image processed, and continue after that point
+                    gs.info("AnchoreContainerVulnIntegration - getDigests() - Resuming Processing at {0}", this.procParams.lastDigest);
+
+                    var firstIndex = images.map(function (i) { return i.digest; }).indexOf(this.procParams.lastDigest) + 1;
+                    var lastIndex = firstIndex + this.config.batchsize;
+                    hasMoreData = images.length > lastIndex;
+                    images = images.slice(firstIndex, lastIndex);
+                    gs.info("AnchoreContainerVulnIntegration - getDigests() - Processing Images {0} - {1}", firstIndex + 1, firstIndex + images.length);
+                } else {
+                    // First Batch - Start from the beginning, sorted by image_digest
+                    hasMoreData = images.length > this.config.batchsize;
+                    if (hasMoreData) {
+                        images = images.slice(0, this.config.batchsize);
+                    }
+                    gs.info("AnchoreContainerVulnIntegration - getDigests() - Processing Images {0} - {1}", 1, images.length);
+                }
+            } catch (ex) {
+                throw new Error("AnchoreContainerVulnIntegration - getDigests() - Exception Batching Images: " + ex.message);
+            }
+
+            try {
+                // Configure next run parameters...
+                this.hasMoreData(hasMoreData);
+                if (hasMoreData) {
+                    this.setNextRunParameters({ lastDigest: images[images.length - 1].digest });
+                } else {
+                    this.setNextRunParameters(null);
+                }
+            } catch (ex) {
+                throw new Error("AnchoreContainerVulnIntegration - getImageSummary() - Exception Configuring Batches: " + ex.message);
+            }
+
+            return images;
+        },
+
+        submitIntegrationJob: function () {
+            var vulns = {
+                vulnerabilities: [],
+            };
+
+            // this.anchoreImages has the summary data for ALL images in Anchore
+            // 'images' is just  the slice of images we are processing in this batch
+            var images = this.getDigests();
+            for (var i = 0; i < images.length; i++) {
+                // Ensure 'sha256' prefix is in place for all Anchore API calls
+                var shaPrefixInSnow = true;
+                var thisDigest = images[i].digest;
+                if (!thisDigest.startsWith('sha256:')) {
+                    thisDigest = "sha256:" + thisDigest;
+                    shaPrefixInSnow = false;
+                }
+
+                // Query Ancestory so we can differentiate between BASE and APP image vulnerabilities
+                var ancestorRespBody = null;
+                try {
+                    var ancestorMsg = this._anch_buildMessage("/v2/images/" + thisDigest + "/ancestors", "");
+                    var ancestorResp = ancestorMsg.execute();
+                    if (ancestorResp.haveError()) {
+                        if (ancestorResp.getStatusCode() == 404) {
+                            gs.warn("AnchoreContainerVulnIntegration - submitIntegrationJob() - Unexpected Missing Image while querying Ancestors: " +
+                                thisDigest);
+                        } else {
+                            gs.warn("AnchoreContainerVulnIntegration - submitIntegrationJob() - Error Querying Ancestors for Image #" + (i + 1) + " (" +
+                                thisDigest.substring(0, 17) + ") : " + vulnsResp.getErrorMessage());
+                        }
+                    } else {
+                        ancestorRespBody = JSON.parse(ancestorResp.getBody());
+                    }
+                } catch (ex) {
+                    gs.warn("AnchoreContainerVulnIntegration - submitIntegrationJob() - Could not collect vuln response for " + thisDigest + ": " +
+                        ex.message);
+                }
+                if (ancestorRespBody == null) {
+                    continue;
+                }
+
+                // Check if Anchore has image ancestry, and if so, identify the base digest
+                var baseImageDigest = null;
+                if (ancestorRespBody.length > 0) {
+                    // The first item in the array is the base image
+                    baseImageDigest = ancestorRespBody[0].image_digest;
+                }
+
+                var vulnsRespBody = null;
+                try {
+                    // If a Base Digset is known, pass it into the 'vuln' query
+                    var vulnsMsg = null;
+                    if (baseImageDigest == null) {
+                        vulnsMsg = this._anch_buildMessage("/v2/images/" + thisDigest + "/vuln/all", "");
+                    } else {
+                        vulnsMsg = this._anch_buildMessage("/v2/images/" + thisDigest + "/vuln/all?base_digest=" + baseImageDigest, "");
+                    }
+                    var vulnsResp = vulnsMsg.execute();
+                    if (vulnsResp.haveError()) {
+                        if (vulnsResp.getStatusCode() == 404) {
+                            gs.warn("AnchoreContainerVulnIntegration - submitIntegrationJob() - Unexpected Missing Image while querying Vulns: " +
+                                thisDigest);
+                        } else {
+                            gs.warn("AnchoreContainerVulnIntegration - submitIntegrationJob() - Error Querying Vuln List for Image #" + (i + 1) +
+                                " (" + thisDigest.substring(0, 17) + ") : " + vulnsResp.getErrorMessage());
+                        }
+                    } else {
+                        vulnsRespBody = JSON.parse(vulnsResp.getBody());
+                    }
+                } catch (ex) {
+                    gs.warn("AnchoreContainerVulnIntegration - submitIntegrationJob() - Could not collect vuln response for " + thisDigest + ": " + ex.message);
+                }
+                if (vulnsRespBody == null) {
+                    continue;
+                }
+
+                var vulnerabilityList = vulnsRespBody["vulnerabilities"];
+                if (vulnerabilityList) {
+                    for (var j = 0; j < vulnerabilityList.length; j++) {
+                        vulnerabilityList[j].imageDigest = images[i].digest;
+                        vulnerabilityList[j].imageId = images[i].id;
+                        vulnerabilityList[j].tag = images[i].tag;
+
+                        // Collapse NVD data into a CSV of CVEs -- avoid SNOW column size limit
+                        // TBD - What is the max length this could get - ensure import table schema is correct in Update Set
+                        vulnerabilityList[j].nvdids = vulnerabilityList[j].nvd_data.map(function (data) { return data.id; }).join(',');
+                        delete vulnerabilityList[j].nvd_data;
+
+                        // Track base vulns if we have a base image
+                        if (baseImageDigest != null && vulnerabilityList[j].inherited_from_base == true) {
+                            if (shaPrefixInSnow) {
+                                vulnerabilityList[j].baseDigest = baseImageDigest;
+                            } else {
+                                vulnerabilityList[j].baseDigest = baseImageDigest.substring(baseImageDigest.indexOf(':') + 1);
+                            }
+                            vulnerabilityList[j].baseTag = this.anchoreImages[baseImageDigest];
+                        }
+                    }
+                    vulns.vulnerabilities = vulns.vulnerabilities.concat(vulnerabilityList);
+                } else {
+                    if (this.config.debug)
+                        gs.info("AnchoreContainerVulnIntegration - submitIntegrationJob() - No Vulns Found For: " + images[i].digest);
+                }
+            }
+
+            if (vulns.vulnerabilities.length == 0) {
+                gs.info("AnchoreContainerVulnIntegration - submitIntegrationJob() - No vulns collected");
+                return;
+            }
+
+            gs.info("AnchoreContainerVulnIntegration - submitIntegrationJob() - Creating Attachment - Total Images: " + images.length +
+                " Total Vulns: " + vulns.vulnerabilities.length);
+            var fileName = this.integrationGr.name + "_" + new GlideDateTime().toString() + ".json";
+            var attachmentGr = new GlideSysAttachment();
+            var sys_id = attachmentGr.write(this.integrationProcessGr, fileName, "json", JSON.stringify(vulns));
+            if (!sys_id) throw new Error("AnchoreContainerVulnIntegration - submitIntegrationJob() - Failed to create attachment");
+            var obj = {
+                contents: sys_id,
+                contentType: "sys_attachment",
+                extension: "json",
+            };
+            return obj;
+        },
+        type: "AnchoreContainerVulnIntegration",
+    }
+);]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-16 17:02:23</sys_created_on>
+        <sys_id>00aa18c497703110fc05fa5ef053af78</sys_id>
+        <sys_mod_count>37</sys_mod_count>
+        <sys_name>AnchoreContainerVulnIntegration</sys_name>
+        <sys_package display_value="Vulnerability Response Integration with Anchore " source="x_1105186_anchore">80409a4e97603110fc05fa5ef053afce</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</sys_scope>
+        <sys_update_name>sys_script_include_00aa18c497703110fc05fa5ef053af78</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-10-25 17:23:53</sys_updated_on>
+    </sys_script_include>
+</record_update>

@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section action="DELETE" caption="" section_id="7485ad0497b43110fc05fa5ef053afb8" sys_domain="global" table="x_1105186_anchore_anchore_vulnerabilty_import" version="3" view="">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.begin_split</element>
+            <position>0</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 22:27:08</sys_created_on>
+            <sys_id>7885654497b43110fc05fa5ef053afc9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 22:27:08</sys_updated_on>
+            <sys_user/>
+            <type>.begin_split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_imagedigest</element>
+            <position>1</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 22:27:08</sys_created_on>
+            <sys_id>f885654497b43110fc05fa5ef053afc9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 22:27:08</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_detected_at</element>
+            <position>2</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 22:27:08</sys_created_on>
+            <sys_id>7c85654497b43110fc05fa5ef053afc9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 22:27:08</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_imageid</element>
+            <position>3</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 22:27:08</sys_created_on>
+            <sys_id>fc85654497b43110fc05fa5ef053afc9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 22:27:08</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_feed</element>
+            <position>4</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 22:27:08</sys_created_on>
+            <sys_id>7085654497b43110fc05fa5ef053afca</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 22:27:08</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_feed_group</element>
+            <position>5</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 22:27:08</sys_created_on>
+            <sys_id>f085654497b43110fc05fa5ef053afca</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 22:27:08</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_fix</element>
+            <position>6</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 22:27:08</sys_created_on>
+            <sys_id>7485654497b43110fc05fa5ef053afca</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 22:27:08</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_package</element>
+            <position>7</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 22:27:08</sys_created_on>
+            <sys_id>f485654497b43110fc05fa5ef053afca</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 22:27:08</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_package_cpe</element>
+            <position>8</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 22:27:08</sys_created_on>
+            <sys_id>7885654497b43110fc05fa5ef053afca</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 22:27:08</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_package_cpe23</element>
+            <position>9</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 22:27:08</sys_created_on>
+            <sys_id>f885654497b43110fc05fa5ef053afca</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 22:27:08</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.split</element>
+            <position>10</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 22:27:08</sys_created_on>
+            <sys_id>7c85654497b43110fc05fa5ef053afca</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 22:27:08</sys_updated_on>
+            <sys_user/>
+            <type>.split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_package_name</element>
+            <position>11</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 22:27:08</sys_created_on>
+            <sys_id>fc85654497b43110fc05fa5ef053afca</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 22:27:08</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_package_path</element>
+            <position>12</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 22:27:08</sys_created_on>
+            <sys_id>7085654497b43110fc05fa5ef053afcb</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 22:27:08</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_severity</element>
+            <position>13</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 22:27:08</sys_created_on>
+            <sys_id>f085654497b43110fc05fa5ef053afcb</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 22:27:08</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_package_type</element>
+            <position>14</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 22:27:08</sys_created_on>
+            <sys_id>7485654497b43110fc05fa5ef053afcb</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 22:27:08</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_package_version</element>
+            <position>15</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 22:27:08</sys_created_on>
+            <sys_id>f485654497b43110fc05fa5ef053afcb</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 22:27:08</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_will_not_fix</element>
+            <position>16</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 22:27:08</sys_created_on>
+            <sys_id>7885654497b43110fc05fa5ef053afcb</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 22:27:08</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_url</element>
+            <position>17</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 22:27:08</sys_created_on>
+            <sys_id>f885654497b43110fc05fa5ef053afcb</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 22:27:08</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_vuln</element>
+            <position>18</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 22:27:08</sys_created_on>
+            <sys_id>7c85654497b43110fc05fa5ef053afcb</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 22:27:08</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.end_split</element>
+            <position>19</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 22:27:08</sys_created_on>
+            <sys_id>fc85654497b43110fc05fa5ef053afcb</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 22:27:08</sys_updated_on>
+            <sys_user/>
+            <type>.end_split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>basetag</element>
+            <position>20</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-10-10 19:38:27</sys_created_on>
+            <sys_id>525e00b997713110fc05fa5ef053af3c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-10-10 19:38:27</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="DELETE">
+            <caption/>
+            <header>false</header>
+            <name>x_1105186_anchore_anchore_vulnerabilty_import</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2023-08-16 22:27:08</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>7485ad0497b43110fc05fa5ef053afb8</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_1105186_anchore_anchore_vulnerabilty_import</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Vulnerability Response Integration with Anchore " source="x_1105186_anchore">80409a4e97603110fc05fa5ef053afce</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</sys_scope>
+            <sys_update_name>sys_ui_section_7485ad0497b43110fc05fa5ef053afb8</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2023-08-16 22:27:08</sys_updated_on>
+            <sys_user/>
+            <title>true</title>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</application>
+        <file_path/>
+        <instance_id>8f65e42a1b6f6d5852a243f4bd4bcbe9</instance_id>
+        <instance_name>dev177796</instance_name>
+        <name>sys_ui_section_7485ad0497b43110fc05fa5ef053afb8</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_ui_section caption="" section_id="7485ad0497b43110fc05fa5ef053afb8" sys_domain="global" table="x_1105186_anchore_anchore_vulnerabilty_import" version="3" view=""><sys_ui_element action="INSERT_OR_UPDATE"><element>.begin_split</element><position>0</position><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-16 22:27:08</sys_created_on><sys_id>7885654497b43110fc05fa5ef053afc9</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-16 22:27:08</sys_updated_on><sys_user/><type>.begin_split</type></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>u_imagedigest</element><position>1</position><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-16 22:27:08</sys_created_on><sys_id>f885654497b43110fc05fa5ef053afc9</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-16 22:27:08</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>u_detected_at</element><position>2</position><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-16 22:27:08</sys_created_on><sys_id>7c85654497b43110fc05fa5ef053afc9</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-16 22:27:08</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>u_imageid</element><position>3</position><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-16 22:27:08</sys_created_on><sys_id>fc85654497b43110fc05fa5ef053afc9</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-16 22:27:08</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>u_feed</element><position>4</position><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-16 22:27:08</sys_created_on><sys_id>7085654497b43110fc05fa5ef053afca</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-16 22:27:08</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>u_feed_group</element><position>5</position><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-16 22:27:08</sys_created_on><sys_id>f085654497b43110fc05fa5ef053afca</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-16 22:27:08</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>u_fix</element><position>6</position><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-16 22:27:08</sys_created_on><sys_id>7485654497b43110fc05fa5ef053afca</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-16 22:27:08</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>u_package</element><position>7</position><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-16 22:27:08</sys_created_on><sys_id>f485654497b43110fc05fa5ef053afca</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-16 22:27:08</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>u_package_cpe</element><position>8</position><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-16 22:27:08</sys_created_on><sys_id>7885654497b43110fc05fa5ef053afca</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-16 22:27:08</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>u_package_cpe23</element><position>9</position><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-16 22:27:08</sys_created_on><sys_id>f885654497b43110fc05fa5ef053afca</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-16 22:27:08</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>.split</element><position>10</position><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-16 22:27:08</sys_created_on><sys_id>7c85654497b43110fc05fa5ef053afca</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-16 22:27:08</sys_updated_on><sys_user/><type>.split</type></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>u_package_name</element><position>11</position><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-16 22:27:08</sys_created_on><sys_id>fc85654497b43110fc05fa5ef053afca</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-16 22:27:08</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>u_package_path</element><position>12</position><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-16 22:27:08</sys_created_on><sys_id>7085654497b43110fc05fa5ef053afcb</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-16 22:27:08</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>u_severity</element><position>13</position><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-16 22:27:08</sys_created_on><sys_id>f085654497b43110fc05fa5ef053afcb</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-16 22:27:08</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>u_package_type</element><position>14</position><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-16 22:27:08</sys_created_on><sys_id>7485654497b43110fc05fa5ef053afcb</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-16 22:27:08</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>u_package_version</element><position>15</position><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-16 22:27:08</sys_created_on><sys_id>f485654497b43110fc05fa5ef053afcb</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-16 22:27:08</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>u_will_not_fix</element><position>16</position><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-16 22:27:08</sys_created_on><sys_id>7885654497b43110fc05fa5ef053afcb</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-16 22:27:08</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>u_url</element><position>17</position><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-16 22:27:08</sys_created_on><sys_id>f885654497b43110fc05fa5ef053afcb</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-16 22:27:08</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>u_vuln</element><position>18</position><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-16 22:27:08</sys_created_on><sys_id>7c85654497b43110fc05fa5ef053afcb</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-16 22:27:08</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>.end_split</element><position>19</position><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-16 22:27:08</sys_created_on><sys_id>fc85654497b43110fc05fa5ef053afcb</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-16 22:27:08</sys_updated_on><sys_user/><type>.end_split</type></sys_ui_element><sys_ui_element action="INSERT_OR_UPDATE"><element>basetag</element><position>20</position><sys_created_by>admin</sys_created_by><sys_created_on>2023-10-10 19:38:27</sys_created_on><sys_id>525e00b997713110fc05fa5ef053af3c</sys_id><sys_mod_count>0</sys_mod_count><sys_ui_formatter/><sys_ui_section caption="NULL" display_value="" name="x_1105186_anchore_anchore_vulnerabilty_import" sys_domain="global" view="Default view">7485ad0497b43110fc05fa5ef053afb8</sys_ui_section><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-10-10 19:38:27</sys_updated_on><sys_user/><type/></sys_ui_element><sys_ui_section action="INSERT_OR_UPDATE"><caption/><header>false</header><name>x_1105186_anchore_anchore_vulnerabilty_import</name><roles/><sys_class_name>sys_ui_section</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2023-08-16 22:27:08</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>7485ad0497b43110fc05fa5ef053afb8</sys_id><sys_mod_count>0</sys_mod_count><sys_name>x_1105186_anchore_anchore_vulnerabilty_import</sys_name><sys_overrides/><sys_package display_value="Vulnerability Response Integration with Anchore " source="x_1105186_anchore">80409a4e97603110fc05fa5ef053afce</sys_package><sys_policy/><sys_scope display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</sys_scope><sys_update_name>sys_ui_section_7485ad0497b43110fc05fa5ef053afb8</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2023-08-16 22:27:08</sys_updated_on><sys_user/><title>true</title><view display_value="Default view" name="NULL">Default view</view><view_name/></sys_ui_section></sys_ui_section></record_update>]]></payload>
+        <payload_hash>736220705</payload_hash>
+        <record_name>Anchore Vulnerabilty Import</record_name>
+        <reverted_from/>
+        <source>8840da8e97603110fc05fa5ef053afdd</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-10-10 19:38:27</sys_created_on>
+        <sys_id>9a5e00b997713110fc05fa5ef053af3f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18b1b190a230000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-10-10 19:38:27</sys_updated_on>
+        <type>Form Layout</type>
+        <update_guid>125e00b902713110df146cd94492ed3f</update_guid>
+        <update_guid_history>125e00b902713110df146cd94492ed3f:736220705,b085654469b43110f54f933ba53de5ce:140145489,3485ad04afb4311030893f0e8a3232ba:1431671007</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-10-11 20:23:01</sys_created_on>
+        <sys_db_object display_value="" name="sys_ui_section">sys_ui_section</sys_db_object>
+        <sys_id>3a93094f5978478091ba521aeac04000</sys_id>
+        <sys_metadata>7485ad0497b43110fc05fa5ef053afb8</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_1105186_anchore_anchore_vulnerabilty_import</sys_name>
+        <sys_package display_value="Vulnerability Response Integration with Anchore " source="x_1105186_anchore">80409a4e97603110fc05fa5ef053afce</sys_package>
+        <sys_parent display_value="">e4792cc497b03110fc05fa5ef053aff2</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Vulnerability Response Integration with Anchore ">80409a4e97603110fc05fa5ef053afce</sys_scope>
+        <sys_scope_delete display_value="">8d9cf9fb7dbc48b4866a314522674ee4</sys_scope_delete>
+        <sys_update_name>sys_ui_section_7485ad0497b43110fc05fa5ef053afb8</sys_update_name>
+        <sys_update_version display_value="sys_ui_section_7485ad0497b43110fc05fa5ef053afb8">9a5e00b997713110fc05fa5ef053af3f</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-10-11 20:23:01</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
